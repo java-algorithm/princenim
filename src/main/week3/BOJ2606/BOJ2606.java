@@ -1,4 +1,4 @@
-package week3.BOJ2606;
+package main.week3.BOJ2606;
 
 import java.util.ArrayList;
 import java.util.Scanner;
