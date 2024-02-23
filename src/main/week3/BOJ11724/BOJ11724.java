@@ -7,14 +7,14 @@ import java.util.ArrayList;
 
 /**
  * 연결요소의 개수
+ * DFS
  * @author hazel
  */
 public class BOJ11724 {
-    static ArrayList<ArrayList<Integer>> graph = new ArrayList<>(); //양방향 연결리스트
+    static ArrayList<ArrayList<Integer>> graph = new ArrayList<>(); //양방향 인접리스트
     static int M, N, U, V;
     static int cnt;
-
-    static boolean[] visited;
+    static boolean[] visited; //방문처리할 배열
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -28,21 +28,19 @@ public class BOJ11724 {
         }
         visited = new boolean[N + 1];
 
-
         for (int i = 0; i < M; i++) {
             String[] uv = br.readLine().split(" ");
             U = Integer.parseInt(uv[0]);
             V = Integer.parseInt(uv[1]);
             graph.get(U).add(V);
-            graph.get(V).add(U);
+            graph.get(V).add(U); //양방향
 
         }
-        //System.out.println(graph);
 
-        for (int i = 1; i <= N; i++) { //1부터 6
+        for (int i = 1; i <= N; i++) {
             if (!visited[i]) {
                 dfs(i);
-                cnt++; //더 이상 연결된 정점이 없으면 빠져나오므로 1 증가
+                cnt++; //더 이상 연결된 정점이 없으면 빠져 나오므로 1 증가
             }
         }
         System.out.println(cnt);
@@ -51,7 +49,7 @@ public class BOJ11724 {
     public static void dfs(int n) {
         visited[n] = true;
         for (int i = 0; i < graph.get(n).size(); i++) {
-            int next = graph.get(n).get(i); //인덱스 주의하기!
+            int next = graph.get(n).get(i); //인덱스 주의하기!!
             if (!visited[next]) {
                 dfs(next);
             }
