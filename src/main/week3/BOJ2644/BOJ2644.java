@@ -7,15 +7,15 @@ import java.util.ArrayList;
 
 /**
  * 촌수계산 DFS
+ * 전체가 아니라 특정 지점으로 도달하는 문제이므로 DFS로 풀이
  * @author hazel
  */
 public class BOJ2644 {
-    //전체가 아니라 특정 지점으로 도달하는 문제이므로 DFS
-    static ArrayList<ArrayList<Integer>> graph = new ArrayList<>(); ////양방향 인접 리스트
+
+    static ArrayList<ArrayList<Integer>> graph = new ArrayList<>(); //양방향 인접 리스트
     static int n, m; //전체사람의수, 부모 자식간의 관계
     static int num1, num2;
     static boolean[] visited;
-
     static int cnt;
     static int answer = -1; //기본은 -1
 
@@ -28,7 +28,6 @@ public class BOJ2644 {
         for (int i = 0; i <= n; i++) {
             graph.add(new ArrayList<>());
         }
-        visited = new boolean[n + 1]; // 0부터시작하니까 +1
 
         String[] str = br.readLine().split(" ");
         num1 = Integer.parseInt(str[0]);
@@ -43,24 +42,23 @@ public class BOJ2644 {
             graph.get(y).add(x); //양방향
         }
 
-        //System.out.println(graph);
+        System.out.println(graph); //그래프 출력 확인
+
         dfs(num1, num2, cnt);
         System.out.println(answer);
-
     }
 
     public static void dfs(int start, int end, int cnt) {
-        //종료
-        if (start == end) { // 7에서 시작해 3이랑 같아지면
+        //종료조건 예를들어 7번과 3번의 관계일때 7번에서 시작해서 3번을 찾으면 종료
+        if (start == end) {
             answer = cnt;
             return;
         }
 
-        visited[start] = true;
+        visited[start] = true; //방문처리
         for (int i = 0; i < graph.get(start).size(); i++) {
             int next = graph.get(start).get(i);
             if (!visited[next]) {
-
                 dfs(next, end, cnt + 1);
             }
         }
