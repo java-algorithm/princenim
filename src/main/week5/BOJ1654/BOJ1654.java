@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 
 /**
  * 랜선 자르기
+ * https://www.acmicpc.net/problem/1654
  * 이진탐색
  *
  * @author hazel
